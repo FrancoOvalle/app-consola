@@ -2,7 +2,7 @@ require('colors');
 
 const { guardarDb, leerDb } = require('./helpers/guardarArchivo');
 //const { mostrarMenu, pausa } = require('./helpers/mensaje');
-const { inquirerMenu, pausa, leerInput } = require('./helpers/inquirer');
+const { inquirerMenu, pausa, leerInput,listadoTareasBorrar , confirmar } = require('./helpers/inquirer');
 // const Tarea = require('./models/tarea');
 const Tareas = require('./models/tareas');
 
@@ -43,6 +43,15 @@ const main = async () => {
             break;
             case '4':
                 tareas.listarPendientesCompletadas(false);
+            break;
+            case '6': //Borrar tarea
+                const id = await listadoTareasBorrar( tareas.listadoArr );
+                const ok  = await confirmar('¿Esta seguro de eliminar?');
+                //TODO: preguntar si esta seguro 
+                if( ok ){
+                    tareas.borrarTarea( id );
+                    console.log('Tarea Borrada');
+                }
             break;
 
         }

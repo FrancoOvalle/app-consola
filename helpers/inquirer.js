@@ -87,9 +87,57 @@ const leerInput = async( message) =>{
     const { desc } = await inquirer.prompt(question);
     return desc;
 }
+const listadoTareasBorrar = async( tareas = []) =>{
+
+    const choices = tareas.map( (tarea, i) =>{
+        const idx = `${i + 1}`.green;
+        return{
+            value: tarea.id,
+            name: `${ idx } ${ tarea.desc }`
+        }
+    });
+
+    const preguntas =[
+        {
+            type: 'list',
+            name: 'id',
+            message: 'borrar',
+            choices
+        }
+    ]
+    console.log();
+    const { id } = await inquirer.prompt(preguntas);
+    return id;
+    // console.log(choices);
+
+
+
+    /**
+     * {
+     * value: tarea.id,
+     * 
+     * }
+     */
+
+}
+
+const confirmar = async ( message ) =>{
+    const question = [
+        {
+            type: 'confirm',
+            name: 'ok',
+            message
+        }
+    ];
+
+    const { ok } = await inquirer.prompt(question);
+    return ok;
+}
 
 module.exports = {
     inquirerMenu,
     pausa, 
-    leerInput
+    leerInput,
+    listadoTareasBorrar,
+    confirmar
 }
