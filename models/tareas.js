@@ -25,6 +25,13 @@ class Tareas {
     constructor(){
         this._listado = {};
     }
+    cargarTareasFromArray ( tareas = []){
+        // console.log('Esto trae tareas ',tareas);
+
+        tareas.forEach ( tarea =>{
+            this._listado[tarea.id]= tarea;
+        });
+    }
 
     crearTarea( desc = ''){
 
